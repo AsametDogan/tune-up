@@ -3,8 +3,8 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, fetchSignInMethodsForEmail } from "firebase/auth";
+import { getFirestore,collection, addDoc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 
@@ -20,28 +20,49 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const db = firebaseApp.firestore();
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 export const storage = getStorage(app);
 
 const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
-        .then((result) => {
-
+        .then( async (result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
+            await addUserData(credential.user.name, credential.user.email, credential.user.profilePhoto, result.user.uid).then(console.log("deneme"))
 
         }).catch((error) => {
             // Handle Errors here.
             const errorCode = error.code;
             const errorMessage = error.message;
             // The email of the user's account used.
-            const email = error.customData.email;
+            const email = error.email;
             // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
         });
+}
+
+const addUserData = async (name, email, profilePhoto, uid) => {
+    console.log(name)
+    console.log(email)
+    try {
+        const docRef = await addDoc(collection(db, "users"), {
+          name: name,
+          email: email,
+          profilePhoto: profilePhoto,
+          uid: uid,
+        });
+        /* const docRef = db.collection("users").add({
+            name: name,
+            email: email,
+            profilePhoto: profilePhoto,
+            uid: uid,}); */
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
 }
 
 
@@ -51,8 +72,5 @@ signOut(auth).then(() => {
     // An error happened.
 });
 
-
-
-
 export default db;
-export { auth, provider, onAuthStateChanged, signInWithGoogle, signOut };
+export { auth, provider, onAuthStateChanged, signInWithGoogle, signOut, addUserData };
