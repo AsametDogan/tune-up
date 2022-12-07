@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import MainPage from "./pages/MainPage";
 import StartPage from "./pages/StartPage"
 
 
@@ -14,7 +14,7 @@ function App() {
             element={user.isLogged ? <Navigate to="/main/*" /> : <StartPage />}
           >
           </Route>
-          <Route exact path="/main/*" element={<HomePage/>} />
+          <Route exact path="/main/*" element={<MainPage/>} />
         </Routes>
       </BrowserRouter>
     </div>

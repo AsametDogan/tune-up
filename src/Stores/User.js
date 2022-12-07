@@ -17,7 +17,7 @@ export const user = createSlice({
             timeZone: "UTC-8",
             webpage: null,
         },
-        isLogged: false,
+        isLogged: true,
 
     },
     reducers: {
