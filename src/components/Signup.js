@@ -1,10 +1,17 @@
 import React, { useState } from 'react'
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md"
 import { FcGoogle } from "react-icons/fc";
+import { signInWithGoogle, auth, provider } from '../firebase';
 
 
 function Signup() {
     const [isVisible, setIsVisible] = useState(false)
+    const loginGoogle = (e) => {
+        e.preventDefault()
+        console.log("first")
+        
+        console.log(signInWithGoogle(auth, provider))
+    }
 
     const handleChangeVisibility = () => {
         //convert to contrast visibility of password // true or false
@@ -34,7 +41,7 @@ function Signup() {
                     <button
                         onClick={() => console.log("form submit button")}
                         className='bg-indigo-600 font-semibold text-base px-2 py-1.5 rounded-lg mt-3 border border-transparent text-white hover:border-indigo-800 hover:bg-indigo-300 hover:text-indigo-800 transition-all duration-200' >Sign Tune-UP</button>
-                    <button className='flex flex-row items-center justify-around border-2 bg-gradient-to-r from-gray-100 via-gray-200-600 to-gray-50 hover:from-indigo-200 hover:via-purple-300 hover:to-gray-200  rounded-lg w-full py-1.5 px-2 transition-all duration-500'><span>Signup with Google</span><FcGoogle className='text-lg' /></button>
+                    <button onClick={loginGoogle} className='flex flex-row items-center justify-around border-2 bg-gradient-to-r from-gray-100 via-gray-200-600 to-gray-50 hover:from-indigo-200 hover:via-purple-300 hover:to-gray-200  rounded-lg w-full py-1.5 px-2 transition-all duration-500'><span>Signup with Google</span><FcGoogle className='text-lg' /></button>
                 </form>
 
             </div>
