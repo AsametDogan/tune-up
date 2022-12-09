@@ -7,14 +7,14 @@ import StartPage from "./pages/StartPage"
 function App() {
   const user = useSelector((state) => state.user)
   return (
-    <div className="text-sm">
+    <div className="text-sm flex flex-col items-center">
       <BrowserRouter>
         <Routes>
           <Route exact path="/*"
             element={user.isLogged ? <Navigate to="/main/*" /> : <StartPage />}
           >
           </Route>
-          <Route exact path="/main/*" element={<MainPage/>} />
+          <Route exact path="/main/*" element={<MainPage />} />
         </Routes>
       </BrowserRouter>
     </div>

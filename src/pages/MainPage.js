@@ -3,8 +3,8 @@ import Navbar from '../components/Navbar'
 
 function MainPage() {
     return (
-        <div className=' max-w-[1290px] h-screen'>
-        <Navbar/>
+        <div className='w-full max-w-[1290px] h-screen'>
+            <Navbar />
         </div>
     )
 }
