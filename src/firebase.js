@@ -30,7 +30,6 @@ const signInWithGoogle = () => {
         .then( async (result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
-            await addUserData(credential.user.name, credential.user.email, credential.user.profilePhoto, result.user.uid).then(console.log("deneme"))
 
         }).catch((error) => {
             // Handle Errors here.

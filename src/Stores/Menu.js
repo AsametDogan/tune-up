@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const menu = createSlice({
     name: 'menu',
     initialState: {
-        menu: "Anasayfa"
+        menu: "home"
 
     },
     reducers: {
