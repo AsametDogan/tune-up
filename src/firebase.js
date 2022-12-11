@@ -43,25 +43,49 @@ const signInWithGoogle = () => {
         });
 }
 
-const addUserData = async (name, email, profilePhoto, uid) => {
-    console.log(name)
-    console.log(email)
+const addUserData = async (name, surname, username, email, birthday, gender, createdAt, isAdmin, musics, profilePhoto, uid) => {
     try {
-        const docRef = await addDoc(collection(db, "users"), {
-          name: name,
-          email: email,
-          profilePhoto: profilePhoto,
-          uid: uid,
-        });
-        /* const docRef = db.collection("users").add({
-            name: name,
+        const docRef = await addData("users", {
+            name: name, 
+            surname: surname,
+            username: username,
             email: email,
+            birthday: birthday,
+            gender: gender,
+            createdAt: createdAt,
+            isAdmin: isAdmin,
+            musics: musics,
             profilePhoto: profilePhoto,
-            uid: uid,}); */
+            uid: uid,
+        });
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
         console.error("Error adding document: ", e);
       }
+}
+
+const addMusicData = async (data, name, like, dislike, createdAt, description, isPublic, color, uid, owner_uid) => {
+    try {
+        const docRef = await addData("musics", {
+            data: data,
+            name: name, 
+            like: like,
+            dislike: dislike,
+            description: description,
+            createdAt: createdAt,
+            isPublic: isPublic,
+            color: color,
+            uid: uid,
+            owner_uid: owner_uid,
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+}
+
+const addData = async (collectionName, object) => {
+    return addDoc(collection(db, collectionName, object));
 }
 
 
@@ -72,4 +96,4 @@ signOut(auth).then(() => {
 });
 
 export default db;
-export { auth, provider, onAuthStateChanged, signInWithGoogle, signOut, addUserData };
+export { auth, provider, onAuthStateChanged, signInWithGoogle, signOut, addUserData, addMusicData };
