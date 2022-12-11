@@ -3,7 +3,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, fetchSignInMethodsForEmail } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore,collection, addDoc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
@@ -41,6 +41,25 @@ const signInWithGoogle = () => {
             const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
         });
+}
+
+const registerUser = (email, password) => {
+    createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+    }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+    });
+}
+
+const loginUser = (email, password) => {
+    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+        const user = userCredential.user;
+    }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+    });
 }
 
 const addUserData = async (name, surname, username, email, birthday, gender, createdAt, isAdmin, musics, profilePhoto, uid) => {
@@ -96,4 +115,4 @@ signOut(auth).then(() => {
 });
 
 export default db;
-export { auth, provider, onAuthStateChanged, signInWithGoogle, signOut, addUserData, addMusicData };
+export { auth, provider, onAuthStateChanged, signInWithGoogle, signOut, addUserData, addMusicData, registerUser, loginUser };
