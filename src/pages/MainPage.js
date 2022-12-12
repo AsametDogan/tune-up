@@ -26,6 +26,7 @@ function MainPage() {
                         <Routes>
                             <Route path="/*" element={<Navigate to={selectedMenu} />}></Route>
                             <Route path="/home" element={<TuneUP />} />
+                            <Route path="/tune-up" element={<TuneUP />} />
                             <Route path="/explore" element={<ExplorePage />} />
                             <Route path="/test" element={<TestPage />} />
                         </Routes>
