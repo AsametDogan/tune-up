@@ -13,15 +13,15 @@ function StartPage() {
     return (
         < >
             <div className='w-full h-screen'>
-               
-               
+
+
                 <Header />
-                    <Routes>
-                        <Route path="/*" element={<>test</>}></Route>
-                        <Route path="/sign-up" element={<Signup />}></Route>
-                        <Route path="/login" element={<Login />}></Route>
-                    </Routes>
-            
+                <Routes>
+                    <Route path="/*" element={<>test</>}></Route>
+                    <Route path="/sign-up" element={<Signup />}></Route>
+                    <Route path="/login" element={<Login />}></Route>
+                </Routes>
+
             </div>
         </>
     )

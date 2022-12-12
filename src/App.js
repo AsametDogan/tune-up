@@ -15,12 +15,12 @@ function App() {
     <div className="text-sm flex flex-col items-center bg-gray-50">
       <BrowserRouter>
         <Routes>
-          <Route exact path="/*"
-            element={user.isLogged ? <Navigate to="/main/*" /> : <Navigate to="/*" />}
+          <Route path="/*"
+            element={user.isLogged ? <Navigate to={"/"+user.user.id} /> : <Navigate to="/auth/sign-up" />}
           >
           </Route>
-          <Route exact path="/main/*" element={<MainPage />} />
-          <Route exact path="/*" element={<StartPage />} />
+          <Route path={"/"+user.user.id+"/*"} element={<MainPage />} />
+          <Route path="/auth/*" element={<StartPage />} />
         </Routes>
       </BrowserRouter>
     </div>
