@@ -7,7 +7,7 @@ function ExplorePage() {
       id: 1,
       ownerId: 21,
       name: "test music",
-      description: "this music which I have been played best in my f*cking life",
+      description: "this music which I have been played best in my life",
       data: [],
       createdAt: "12.12.2022",
       color: "red",
@@ -20,7 +20,7 @@ function ExplorePage() {
       id: 12,
       ownerId: 21,
       name: "test music",
-      description: "this music which I have been played best in my f*cking life",
+      description: "this music which I have been played best in my life",
       data: [],
       createdAt: "12.12.2022",
       color: "red",
@@ -33,7 +33,7 @@ function ExplorePage() {
       id: 3,
       ownerId: 21,
       name: "test music",
-      description: "this music which I have been played best in my f*cking life",
+      description: "this music which I have been played best in my life",
       data: [],
       createdAt: "12.12.2022",
       color: "red",
@@ -46,7 +46,7 @@ function ExplorePage() {
       id: 4,
       ownerId: 21,
       name: "test music",
-      description: "this music which I have been played best in my f*cking life",
+      description: "this music which I have been played best in my life",
       data: [],
       createdAt: "12.12.2022",
       color: "red",
@@ -59,7 +59,7 @@ function ExplorePage() {
       id: 5,
       ownerId: 21,
       name: "test music",
-      description: "this music which I have been played best in my f*cking life",
+      description: "this music which I have been played best in my life",
       data: [],
       createdAt: "12.12.2022",
       color: "red",
@@ -72,7 +72,7 @@ function ExplorePage() {
       id: 15,
       ownerId: 21,
       name: "test music",
-      description: "this music which I have been played best in my f*cking life",
+      description: "this music which I have been played best in my life",
       data: [],
       createdAt: "12.12.2022",
       color: "red",
@@ -85,7 +85,7 @@ function ExplorePage() {
       id: 9,
       ownerId: 21,
       name: "test music",
-      description: "this music which I have been played best in my f*cking life",
+      description: "this music which I have been played best in my life",
       data: [],
       createdAt: "12.12.2022",
       color: "red",
@@ -98,7 +98,7 @@ function ExplorePage() {
 
 
   return (
-    <div className='w-full flex flex-col gap-3 sm:gap-0.5'>
+    <div className='w-full flex flex-col gap-3 sm:gap-0.5 overflow-y-scroll scrollbar-hide'>
       {
         musics.map((music) => (
           <MusicPost music={music} id={music.id} />

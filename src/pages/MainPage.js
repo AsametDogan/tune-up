@@ -16,12 +16,12 @@ function MainPage() {
     }
 
     return (
-        <div className='w-full max-w-[1290px] h-screen'>
+        <div className='w-full just-xl:max-w-[90%] h-screen'>
             <Navbar />
             <div className='flex h-[calc(100%-80px)] w-full flex-row sm:flex-col items-center justify-center  '>
                 <LeftBar />
                 <div className='test h-full w-full  px-6 sm:px-0 rounded-lg  self-center flex flex-row justify-center items-center'>
-                    <div className='w-[90%] sm:w-full h-full just-sm:px-5 flex flex-row justify-center py-3  bg-amber-50 rounded-lg sm:shadow shadow-lg '>
+                    <div className='w-[90%] sm:w-full h-full just-sm:px-5 sm:pb-5 flex flex-row justify-center  bg-amber-50 rounded-lg sm:shadow shadow-lg '>
 
                         <Routes>
                             <Route path="/*" element={<Navigate to={selectedMenu} />}></Route>

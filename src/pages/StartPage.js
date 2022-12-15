@@ -12,7 +12,7 @@ import {
 function StartPage() {
     return (
         < >
-            <div className='w-full h-screen'>
+            <div className='w-full h-screen flex flex-col items-center'>
 
 
                 <Header />
