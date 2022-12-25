@@ -3,7 +3,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, fetchSignInMethodsForEmail } from "firebase/auth";
 import { getFirestore,collection, addDoc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
@@ -44,22 +44,27 @@ const signInWithGoogle = () => {
 }
 
 const registerUser = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-    }).catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-    });
+    if(!userExists(email)){
+        createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+        });
+    }
+    
 }
 
 const loginUser = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-        const user = userCredential.user;
-    }).catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-    });
+    if(userExists(email)){
+        signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+            const user = userCredential.user;
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+        });
+    }
 }
 
 const addUserData = async (name, surname, username, email, birthday, gender, createdAt, isAdmin, musics, profilePhoto, uid) => {
@@ -107,6 +112,22 @@ const addData = async (collectionName, object) => {
     return addDoc(collection(db, collectionName, object));
 }
 
+const forgetPassword = (email,) => {
+    sendPasswordResetEmail(email).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+    });
+}
+
+const userExists = (email) => {
+    let methods = fetchSignInMethodsForEmail(email);
+    if(methods.length != 0){
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 signOut(auth).then(() => {
     // Sign-out successful.
@@ -115,4 +136,4 @@ signOut(auth).then(() => {
 });
 
 export default db;
-export { auth, provider, onAuthStateChanged, signInWithGoogle, signOut, addUserData, addMusicData, registerUser, loginUser };
+export { auth, provider, onAuthStateChanged, signInWithGoogle, signOut, addUserData, addMusicData, registerUser, loginUser, forgetPassword };
