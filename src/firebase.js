@@ -109,7 +109,7 @@ const addMusicData = async (data, name, like, dislike, createdAt, description, i
 }
 
 const addData = async (collectionName, object) => {
-    return addDoc(collection(db, collectionName, object));
+    return addDoc(collection(db, collectionName + "/" + object.uid, object));
 }
 
 const forgetPassword = (email,) => {
@@ -127,7 +127,6 @@ const userExists = (email) => {
         return false;
     }
 }
-
 
 signOut(auth).then(() => {
     // Sign-out successful.
