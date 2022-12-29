@@ -97,6 +97,15 @@ const getData = async (collectionName, uid) => {
     }
 }
 
+const getAllData = async (collectionName) => {
+
+    const querySnapshot = await getDocs(collection(db, collectionName));
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+    });
+}
+
 const addMusicData = async (data, name, like, dislike, createdAt, description, isPublic, color, uid, owner_uid) => {
     try {
         const docRef = await addData("musics", {
