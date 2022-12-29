@@ -12,19 +12,50 @@ function TuneUP() {
 
   const [startTime, setStartTime] = useState(0)
   const [isRecording, setIsRecording] = useState(false)
+  let a = false
 
   const selectedMenu = useSelector(state => state.menu.menu)
 
-  useEffect(() => { //click a button
-    document.addEventListener("keypress", function (event) {
-      makeSound(event.key, event.timeStamp);
-      handleSaveSound(event.key, event.timeStamp)
-    });
-  }, [])
+  useEffect(() => {
+    console.log(sound)
+  }, [sound])
 
-  const handleSaveSound = async (key, time) => {
-    await soundKeys.push({ key, time })
-    setSound(soundKeys)
+  const ss = (event, isRecord) => {
+    if (selectedMenu === "tune-up") { //work just in tune-up page
+      //makeSound(event.key, event.timeStamp);
+      if (isRecord) {
+
+        makeSound(event.key, event.timeStamp);
+        return;
+      }
+      else {
+
+        playSound(event.key, event.timeStamp);
+        return;
+      }
+    }
+  }
+
+
+  useEffect(() => {
+    function playS(event) {
+      ss(event, isRecording)
+    }
+
+    document.addEventListener("keydown", playS);
+
+    return () => document.removeEventListener("keydown", playS) //react useeffect addeventlistener delete 
+  }, [isRecording])
+
+
+
+
+
+  const handleSaveSound = (key, time) => {
+    //console.log("first")
+    //soundKeys.push({ key, time })
+    console.log("first")
+    setSound(prev => [...prev, { key, time }])
   }
 
   useEffect(() => {
@@ -44,86 +75,60 @@ function TuneUP() {
 
   // }
 
-
   function makeSound(key, time) {
+    console.log("makeSound function with " + key + " " + time)
+
     switch (key) {
       case "w":
         // play()
         var tom1Audio = new Audio(tom1Sound);
-        tom1Audio.play();
-        if (startTime.toString.length > 0 && isRecording) {
-          console.log("first")
-          handleSaveSound(key, (time - startTime))
-        }
-        else {
-          playSound(key)
-        }
+        tom1Audio.play()
+
+
+        handleSaveSound(key, (time - startTime))
+
         break;
 
       case "a":
         var tom2Audio = new Audio(tom2Sound);
         tom2Audio.play();
-        if (startTime.toString.length > 0 && isRecording) {
-          handleSaveSound(key, (time - startTime))
-        }
-        else {
-          playSound(key)
-        }
+        handleSaveSound(key, (time - startTime))
         break;
 
       case "s":
         var tom3Audio = new Audio(tom3Sound);
         tom3Audio.play();
-        if (startTime.toString.length > 0 && isRecording) {
-          handleSaveSound(key, (time - startTime))
-        }
-        else {
-          playSound(key)
-        }
+        handleSaveSound(key, (time - startTime))
+
         break;
 
       case "d":
         var tom4Audio = new Audio(tom4Sound);
         tom4Audio.play();
-        if (startTime.toString.length > 0 && isRecording) {
-          handleSaveSound(key, (time - startTime))
-        }
-        else {
-          playSound(key)
-        }
+        handleSaveSound(key, (time - startTime))
+
         break;
 
       case "j":
         var snareAudio = new Audio(snareSound);
         snareAudio.play();
-        if (startTime.toString.length > 0 && isRecording) {
-          handleSaveSound(key, (time - startTime))
-        }
-        else {
-          playSound(key)
-        }
+        handleSaveSound(key, (time - startTime))
+
         break;
 
       case "k":
         var crashAudio = new Audio(crashSound);
         crashAudio.play();
-        if (startTime.toString.length > 0 && isRecording) {
-          handleSaveSound(key, (time - startTime))
-        }
-        else {
-          playSound(key)
-        }
+        handleSaveSound(key, (time - startTime))
+
         break;
 
       case "l":
         var kickAudio = new Audio(kickBassSound);
         kickAudio.play();
-        if (startTime.toString.length > 0 && isRecording) {
-          handleSaveSound(key, (time - startTime))
-        }
-        else {
-          playSound(key)
-        }
+        handleSaveSound(key, (time - startTime))
+
+
         break;
 
       default: ;
@@ -132,6 +137,7 @@ function TuneUP() {
   }
 
   function playSound(key) {
+    console.log("playSound function with " + key)
     switch (key) {
       case "w":
         // play()
@@ -174,7 +180,7 @@ function TuneUP() {
     }
   }
 
-  
+
   const play = () => {
     sound.forEach(item => {
       setTimeout(() => {
@@ -186,19 +192,41 @@ function TuneUP() {
   const handleClickRecord = (e) => {
     if (isRecording) {
       setIsRecording(false)
+
+
     }
     else {
       setIsRecording(true)
-      setStartTime(e.timeStamp)
+      setSound([])
+      setStartTime(e.time)
     }
 
+  }
+
+  const handleClickButton = (e) => {
+    console.log(e.target)
+    console.log(e.target.id)
+    ss({...e,key:e.target.id},isRecording)
+    
   }
 
   return (
     <>
       <div className='w-full h-full bg-red-100 flex flex-col items-center gap-5'>
-        <div className='flex flex-row gap-6 overflow-y-scroll scrollbars-hide' >
-          <div className={`${test === "a" ? "animate-ak" : ""} drum  rounded-full w-20 h-20 shadow-md cursor-pointer bg-cyan-600 hover:bg-cyan-300 duration-200 transition-all flex items-center justify-center text-center pb-1`}>
+        <div className='flex flex-wrap gap-6 overflow-y-scroll scrollbars-hide' >
+          <div onClick={handleClickButton} id={"w"} className={` drum  rounded-full w-20 h-20 shadow-md cursor-pointer bg-cyan-600 hover:bg-cyan-300 duration-200 transition-all flex items-center justify-center text-center pb-1`}>
+            w
+          </div>
+          <div onClick={handleClickButton} id={"a"} className={` drum  rounded-full w-20 h-20 shadow-md cursor-pointer bg-cyan-600 hover:bg-cyan-300 duration-200 transition-all flex items-center justify-center text-center pb-1`}>
+            a
+          </div>
+          <div onClick={handleClickButton} id={"a"} className={`drum  rounded-full w-20 h-20 shadow-md cursor-pointer bg-cyan-600 hover:bg-cyan-300 duration-200 transition-all flex items-center justify-center text-center pb-1`}>
+            s
+          </div>
+          <div onClick={handleClickButton} id={"a"} className={` drum  rounded-full w-20 h-20 shadow-md cursor-pointer bg-cyan-600 hover:bg-cyan-300 duration-200 transition-all flex items-center justify-center text-center pb-1`}>
+            d
+          </div>
+          <div onClick={handleClickButton} id={"a"} className={` drum  rounded-full w-20 h-20 shadow-md cursor-pointer bg-cyan-600 hover:bg-cyan-300 duration-200 transition-all flex items-center justify-center text-center pb-1`}>
             a
           </div>
         </div>
@@ -210,7 +238,9 @@ function TuneUP() {
                 : <><BsCheck2Circle className='group-hover:bg-indigo-100 p-1.5 rounded-full' /><span className='text-xs'>Complete</span></>
             }
           </button>
-          <button onClick={play} className="flex justify-center items-center gap-1 hover:animate-bounce text-purple-600 p-1 rounded-lg text-base hover:bg-purple-100 "><GiMusicalNotes /><span className='text-xs'>Test</span></button>
+          <button onClick={play} className="flex justify-center items-center gap-1 hover:animate-bounce text-purple-600 p-1 rounded-lg text-base hover:bg-purple-100 ">
+            <GiMusicalNotes /><span className='text-xs'>Test</span>
+          </button>
           <div>
             <></>
             <button disabled={true} className='flex items-center gap-1 text-xl text-green-600 p-1 hover:text-green-700 hover:bg-green-200 rounded-lg transition-all'><FiSave /><span className='text-xs'>Save</span></button>

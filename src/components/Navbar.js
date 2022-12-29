@@ -14,7 +14,7 @@ function Navbar() {
   const userName = useSelector(state => state.user.user.name)
   const selectedMenu = useSelector(state => state.user.isLogged)
   const [openSettings, setOpenSettings] = useState(false)
-  console.log(openSettings)
+
   return (
     <>
       <div className='w-full px-6 sm:px-4 py-2 mb-5 sm:mb-0 flex flex-row justify-between border-b items-center '>

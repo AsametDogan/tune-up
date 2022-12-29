@@ -36,7 +36,6 @@ function MainPage() {
                                 <Route path="/test" element={<TestPage />} />
                             </Routes>
 
-
                         </div>
                     </div>
                     <BottomBar />

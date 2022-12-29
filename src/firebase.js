@@ -88,7 +88,7 @@ const addUserData = async (name, surname, username, email, birthday, gender, cre
       }
 }
 
-const addMusicData = async (data, name, like, dislike, createdAt, description, isPublic, color, uid, owner_uid) => {
+const addMusicData = async (data, name, like, dislike, createdAt, description, isPublic, uid, owner_uid) => {
     try {
         const docRef = await addData("musics", {
             data: data,
@@ -98,7 +98,6 @@ const addMusicData = async (data, name, like, dislike, createdAt, description, i
             description: description,
             createdAt: createdAt,
             isPublic: isPublic,
-            color: color,
             uid: uid,
             owner_uid: owner_uid,
         });

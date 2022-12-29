@@ -10,7 +10,6 @@ function BottomBar() {
     const handleChangeMenu = (e) => {
         dispatch(setMenu(e.target.id))
     }
-    console.log(selectedMenu)
     return (
         <div className='just-sm:hidden px-4 grid grid-cols-4 gap-8 justify-around text-xl items-center bg-slate-200 fixed bottom-0 w-full h-12'>
             <Link

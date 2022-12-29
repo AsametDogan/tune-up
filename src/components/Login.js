@@ -5,9 +5,9 @@ import { drumHeart } from '../media/mediaIndex';
 
 function Login() {
     const [isVisible, setIsVisible] = useState(false)
-
     const handleChangeVisibility = () => {
-        //convert to contrast visibility of password // true or false
+        //convert to contrast visibility of password // true or false 
+        //e.preventDefault()
         setIsVisible(!isVisible)
     }
 
@@ -26,6 +26,7 @@ function Login() {
                             <input type={`${isVisible ? "text" : "password"}`} className='w-full px-3 py-2 outline-none rounded-l-lg border border-transparent focus:border-indigo-600 bg-indigo-200 transition-all duration-200' placeholder='Password'></input>
                             <div className=' flex rounded-r-lg h-full border border-transparent focus:border-indigo-600 bg-indigo-200 items-center'>
                                 {
+
                                     isVisible ?
                                         <MdOutlineVisibility onClick={handleChangeVisibility} className='mr-2 opacity-60 hover:opacity-100 cursor-pointer text-base' />
                                         :
