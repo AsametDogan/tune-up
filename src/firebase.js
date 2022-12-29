@@ -1,10 +1,8 @@
 import { initializeApp } from "firebase/app";
-import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import { getAnalytics } from "firebase/analytics";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, fetchSignInMethodsForEmail } from "firebase/auth";
-import { getFirestore,collection, addDoc } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider, signOut, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, fetchSignInMethodsForEmail, browserLocalPersistence, setPersistence } from "firebase/auth";
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 
@@ -25,52 +23,52 @@ const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 export const storage = getStorage(app);
 
-const signInWithGoogle = () => {
-    signInWithPopup(auth, provider)
-        .then( async (result) => {
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
+const registerUser = async (email, password) => {
+    // FIXME: userExists check not working
+    //if(!userExists(email)){
+    console.log("Creating user");
+    await createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(user.uid);
+        addUserData("", "", "", "", "", "", "", "", "", "", user.uid);
+        console.log("User successfully created");
+    }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+    });
+    //}
 
-        }).catch((error) => {
+}
+
+const loginUser = async (email, password) => {
+    // FIXME: Not Working Again
+    //if (userExists(email)) {
+    await setPersistence(auth, browserLocalPersistence)
+        .then(async () => {
+            // Existing and future Auth states are now persisted in the current
+            // session only. Closing the window would clear any existing state even
+            // if a user forgets to sign out.
+            // ...
+            // New sign-in will be persisted with session persistence.
+            return await signInWithEmailAndPassword(auth, email, password).then((response) => {
+                getData("users", response.user.uid);
+            });
+
+        })
+        .catch((error) => {
             // Handle Errors here.
             const errorCode = error.code;
             const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.email;
-            // The AuthCredential type that was used.
-            const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
         });
-}
+    //}
 
-const registerUser = (email, password) => {
-    if(!userExists(email)){
-        createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-        }).catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-        });
-    }
-    
-}
-
-const loginUser = (email, password) => {
-    if(userExists(email)){
-        signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-            const user = userCredential.user;
-        }).catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-        });
-    }
 }
 
 const addUserData = async (name, surname, username, email, birthday, gender, createdAt, isAdmin, musics, profilePhoto, uid) => {
     try {
-        const docRef = await addData("users", {
-            name: name, 
+        await addData("users", {
+            name: name,
             surname: surname,
             username: username,
             email: email,
@@ -82,17 +80,28 @@ const addUserData = async (name, surname, username, email, birthday, gender, cre
             profilePhoto: profilePhoto,
             uid: uid,
         });
-        console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
+    } catch (e) {
         console.error("Error adding document: ", e);
-      }
+    }
+}
+
+const getData = async (collectionName, uid) => {
+    const docRef = doc(db, collectionName, uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
 }
 
 const addMusicData = async (data, name, like, dislike, createdAt, description, isPublic, color, uid, owner_uid) => {
     try {
         const docRef = await addData("musics", {
             data: data,
-            name: name, 
+            name: name,
             like: like,
             dislike: dislike,
             description: description,
@@ -103,29 +112,33 @@ const addMusicData = async (data, name, like, dislike, createdAt, description, i
             owner_uid: owner_uid,
         });
         console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
+    } catch (e) {
         console.error("Error adding document: ", e);
-      }
+    }
 }
 
 const addData = async (collectionName, object) => {
-    return addDoc(collection(db, collectionName + "/" + object.uid, object));
+    console.log(object);
+    return await setDoc(doc(db, collectionName, object.uid), object);
 }
 
-const forgetPassword = (email,) => {
+const forgetPassword = (email) => {
     sendPasswordResetEmail(email).catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
     });
 }
 
-const userExists = (email) => {
-    let methods = fetchSignInMethodsForEmail(email);
-    if(methods.length != 0){
+const userExists = async (email) => {
+    const methods = await fetchSignInMethodsForEmail(auth, email);
+    if (methods.length != 0) {
+        console.log("True");
         return true;
     } else {
+        console.log("false");
         return false;
     }
+
 }
 
 signOut(auth).then(() => {
@@ -135,4 +148,4 @@ signOut(auth).then(() => {
 });
 
 export default db;
-export { auth, provider, onAuthStateChanged, signInWithGoogle, signOut, addUserData, addMusicData, registerUser, loginUser, forgetPassword };
+export { auth, provider, onAuthStateChanged, signOut, addUserData, addMusicData, registerUser, loginUser, forgetPassword };

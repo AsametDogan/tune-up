@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md"
 import { FcGoogle } from "react-icons/fc";
-import { signInWithGoogle, auth, provider, addUserData } from '../firebase';
+import { signInWithGoogle, auth, provider, addUserData, registerUser } from '../firebase';
 import { useForm } from "react-hook-form";
 import { drumHeart } from '../media/mediaIndex';
+import { collectionGroup } from 'firebase/firestore';
 
 
 function Signup() {
     const { register, handleSubmit } = useForm();
 
     const [isVisible, setIsVisible] = useState(false)
-    const loginGoogle = (e) => {
+/*     const loginGoogle = (e) => {
         e.preventDefault()
 
       //  console.log(signInWithGoogle(auth, provider))
-    }
+    } */
 
     const onSubmit = data => {
-        addUserData(data.nickname, data.email, "", "")
+        registerUser('emurat.uzun@gmail.com', 'deneme123');
+        // addUserData(data.nickname, data.email, "", "")
     };
 
     const handleChangeVisibility = () => {
@@ -55,7 +57,7 @@ function Signup() {
                             type="submit"
                             onClick={() => console.log("boş")}
                             className='bg-indigo-600 font-semibold text-base px-2 py-1.5 rounded-lg mt-3 border border-transparent text-white hover:border-indigo-800 hover:bg-indigo-300 hover:text-indigo-800 transition-all duration-200' >Sign Tune-UP</button>
-                        <button onClick={loginGoogle} className='flex flex-row items-center justify-around border-2 bg-gradient-to-r from-gray-100 via-gray-200-600 to-gray-50 hover:from-indigo-200 hover:via-purple-300 hover:to-gray-200  rounded-lg w-full py-1.5 px-2 transition-all duration-500'><span>Signup with Google</span><FcGoogle className='text-lg' /></button>
+                       {/*  <button onClick={loginGoogle} className='flex flex-row items-center justify-around border-2 bg-gradient-to-r from-gray-100 via-gray-200-600 to-gray-50 hover:from-indigo-200 hover:via-purple-300 hover:to-gray-200  rounded-lg w-full py-1.5 px-2 transition-all duration-500'><span>Signup with Google</span><FcGoogle className='text-lg' /></button> */}
                     </form>
                 </div>
             </div>

@@ -14,6 +14,7 @@ function App() {
   return (
     <div className="text-sm flex flex-col items-center bg-gray-50">
       {
+
         user.isLogged ? <MainPage /> : <StartPage />
       }
       {/* <BrowserRouter>
