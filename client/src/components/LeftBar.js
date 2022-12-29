@@ -62,11 +62,11 @@ function LeftBar() {
                         TuneUP
                     </Link>
                     <Link
-                        to="test"
+                        to="user-sounds"
                         onClick={handleChangeMenu}
                         id='test'
                         className={`${selectedMenu === "test" ? "opacity-90 bg-indigo-600 scale-105 text-sky-50 hover:text-gray-900" : "bg-transparent"} rounded-lg  hover:bg-slate-200 px-2.5 py-1.5 opacity-70 hover:opacity-95 transition-all duration-300 text-left flex items-center gap-1 hover:scale-110`}>
-                        Try Yourself
+                        User Sounds
                     </Link>
                 </div>
             </div>

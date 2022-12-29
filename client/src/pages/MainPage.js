@@ -6,27 +6,27 @@ import LeftBar from '../components/LeftBar'
 import Navbar from '../components/Navbar'
 import ExplorePage from './ExplorePage'
 import IntroPage from './IntroPage'
-import TestPage from './TestPage'
+import UserSounds from './UserSoundsPage'
 import TuneUP from './TuneUP'
-import { onAuthStateChanged, auth } from '../firebase'
+// import { onAuthStateChanged, auth } from '../firebase'
 
 
 function MainPage() {
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/firebase.User
-                const uid = user.uid;
-                // ...
-                console.log("uid", uid)
-            } else {
-                // User is signed out
-                // ...
-                console.log("user is logged out")
-            }
-        });
+        // onAuthStateChanged(auth, (user) => {
+        //     if (user) {
+        //         // User is signed in, see docs for a list of available properties
+        //         // https://firebase.google.com/docs/reference/js/firebase.User
+        //         const uid = user.uid;
+        //         // ...
+        //         console.log("uid", uid)
+        //     } else {
+        //         // User is signed out
+        //         // ...
+        //         console.log("user is logged out")
+        //     }
+        // });
 
     }, [])
     const user = useSelector(state => state.user.user)
@@ -51,7 +51,7 @@ function MainPage() {
                                 <Route path="/home" element={<IntroPage />} />
                                 <Route path="/tune-up" element={<TuneUP />} />
                                 <Route path="/explore" element={<ExplorePage />} />
-                                <Route path="/test" element={<TestPage />} />
+                                <Route path="/user-sounds" element={<UserSounds />} />
                             </Routes>
 
                         </div>

@@ -31,7 +31,7 @@ function BottomBar() {
                 <GiDrumKit id="tune-up" />
             </Link>
             <Link
-                to="test"
+                to="user-sounds"
                 onClick={handleChangeMenu} id="test"
                 className={`flex justify-center py-2 hover:bg-slate-300 rounded-lg opacity-70 hover:opacity-95 transition-all duration-300 focus:bg-violet-600 scale-105 focus:text-sky-50 ${selectedMenu === "test" ? "opacity-90 bg-violet-600 scale-105 text-sky-50 hover:text-gray-900" : ""}`}>
                 <MdQueueMusic id="test" />
