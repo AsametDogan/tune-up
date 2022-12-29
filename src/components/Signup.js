@@ -13,7 +13,7 @@ function Signup() {
     const loginGoogle = (e) => {
         e.preventDefault()
 
-        console.log(signInWithGoogle(auth, provider))
+      //  console.log(signInWithGoogle(auth, provider))
     }
 
     const onSubmit = data => {

@@ -13,16 +13,19 @@ function App() {
 
   return (
     <div className="text-sm flex flex-col items-center bg-gray-50">
-      <BrowserRouter>
+      {
+        user.isLogged ? <MainPage /> : <StartPage />
+      }
+      {/* <BrowserRouter>
         <Routes>
           <Route path="/*"
-            element={user.isLogged ? <Navigate to={"/"+user.user.id} /> : <Navigate to="/auth/sign-up" />}
+            element={user.isLogged ? <Navigate to={"/" + user.user.id} /> : <Navigate to="/auth/sign-up" />}
           >
           </Route>
-          <Route path={"/"+user.user.id+"/*"} element={<MainPage />} />
+          <Route path={"/" + user.user.id + "/*"} element={<MainPage />} />
           <Route path="/auth/*" element={<StartPage />} />
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
     </div>
   );
 }
