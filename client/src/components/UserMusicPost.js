@@ -79,6 +79,7 @@ function MusicPost({ music, deleteSound , changePublic,id}) {
       <div>
         <p className="text-sm text-gray-600">{music.description}</p>
       </div>
+      
       {/* delete and edit buttons */}
       <div className="w-full flex flex-row justify-end gap-2">
         <div className=" flex h-full text-xl border border-transparent focus:border-indigo-600 p-1 hover:bg-slate-200 rounded-full  items-center">
