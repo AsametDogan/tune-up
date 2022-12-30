@@ -45,7 +45,6 @@ function MainPage() {
                     <div className='test h-full w-full  px-6 sm:px-0 rounded-lg  self-center flex flex-row justify-center items-center'>
                         <div className='w-[90%] sm:w-full h-full just-sm:px-5 sm:pb-5 flex flex-row justify-center  bg-sky-50 rounded-lg sm:shadow shadow-lg '>
 
-
                             <Routes>
                                 <Route path="/*" element={<Navigate to={selectedMenu} />} />
                                 <Route path="/home" element={<IntroPage />} />

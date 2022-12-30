@@ -240,24 +240,38 @@ function TuneUP() {
           </div>
           <div
             onClick={handleClickButton}
-            id={"a"}
+            id={"s"}
             className={`drum  rounded-full w-20 h-20 shadow-md cursor-pointer bg-cyan-600 hover:bg-cyan-300 duration-200 transition-all flex items-center justify-center text-center pb-1`}
           >
             s
           </div>
           <div
             onClick={handleClickButton}
-            id={"a"}
+            id={"d"}
             className={` drum  rounded-full w-20 h-20 shadow-md cursor-pointer bg-cyan-600 hover:bg-cyan-300 duration-200 transition-all flex items-center justify-center text-center pb-1`}
           >
             d
           </div>
           <div
             onClick={handleClickButton}
-            id={"a"}
+            id={"j"}
             className={` drum  rounded-full w-20 h-20 shadow-md cursor-pointer bg-cyan-600 hover:bg-cyan-300 duration-200 transition-all flex items-center justify-center text-center pb-1`}
           >
-            a
+            j
+          </div>
+          <div
+            onClick={handleClickButton}
+            id={"k"}
+            className={` drum  rounded-full w-20 h-20 shadow-md cursor-pointer bg-cyan-600 hover:bg-cyan-300 duration-200 transition-all flex items-center justify-center text-center pb-1`}
+          >
+            k
+          </div>
+          <div
+            onClick={handleClickButton}
+            id={"l"}
+            className={` drum  rounded-full w-20 h-20 shadow-md cursor-pointer bg-cyan-600 hover:bg-cyan-300 duration-200 transition-all flex items-center justify-center text-center pb-1`}
+          >
+            l
           </div>
         </div>
 

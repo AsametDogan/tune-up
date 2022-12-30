@@ -11,6 +11,7 @@ import {
 
 function StartPage() {
     const [tab, setTab] = useState("login")
+    
     return (
         < >
             <div className='w-full h-screen flex flex-col items-center'>
