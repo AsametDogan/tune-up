@@ -43,6 +43,7 @@ function Login() {
 
           <form className="flex flex-col gap-4 min-w-[230px] justify-center">
             <input
+              required
               value={mail}
               onChange={(e) => setMail(e.target.value)}
               type={"text"}
@@ -51,6 +52,7 @@ function Login() {
             ></input>
             <div className="flex flex-row w-full items-center ">
               <input
+                required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 type={`${isVisible ? "text" : "password"}`}

@@ -29,7 +29,7 @@ function Signup() {
           dispatch(login({ name: res.data.name, email: res.data.email, id: res.data.id }));
         })
         .catch((err) => {
-          console.log(err);
+          console.log("hataa"+err);
         });
     });
 
@@ -58,19 +58,22 @@ function Signup() {
             className="flex flex-col gap-4 min-w-[230px] justify-center"
           >
             <input
+              required
               {...register("name")}
               type={"text"}
               className="px-3 py-2 outline-none rounded-lg border border-transparent focus:border-indigo-600 bg-indigo-200 transition-all duration-200"
               placeholder="Nickname"
             ></input>
             <input
+              required
               {...register("email")}
-              type={"text"}
+              type={"mail"}
               className="px-3 py-2 outline-none rounded-lg border border-transparent focus:border-indigo-600 bg-indigo-200 transition-all duration-200"
               placeholder="Mail"
             ></input>
             <div className="flex flex-row w-full items-center ">
               <input
+                required
                 {...register("password")}
                 type={`${isVisible ? "text" : "password"}`}
                 className="w-full px-3 py-2 outline-none rounded-l-lg border border-transparent focus:border-indigo-600 bg-indigo-200 transition-all duration-200"
