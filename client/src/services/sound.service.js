@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://tune-up-xi.vercel.app/" + "/sound/";
+const url = "https://tune-up-xi.vercel.app/" + "sound/";
 
 const getAll = () => {
     return axios.get(url);
