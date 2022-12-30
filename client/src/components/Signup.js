@@ -67,7 +67,7 @@ function Signup() {
             <input
               required
               {...register("email")}
-              type={"mail"}
+              type={"email"}
               className="px-3 py-2 outline-none rounded-lg border border-transparent focus:border-indigo-600 bg-indigo-200 transition-all duration-200"
               placeholder="Mail"
             ></input>
