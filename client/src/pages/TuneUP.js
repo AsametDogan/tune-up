@@ -223,7 +223,7 @@ function TuneUP() {
   return (
     <>
       <div className="w-full h-full bg-red-100 flex flex-col items-center gap-5">
-        <div className="flex flex-wrap gap-6 overflow-y-scroll scrollbars-hide">
+        <div className="flex flex-wrap gap-6 overflow-y-scroll scrollbars-hide p-6">
           <div
             onClick={handleClickButton}
             id={"w"}

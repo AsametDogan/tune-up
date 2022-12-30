@@ -65,6 +65,9 @@ function MusicPost({ music }) {
   return (
     <div className="w-full flex flex-col rounded-md px-3 py-4 gap-2 border  shadow-sm bg-white hover:shadow transition-all duration-300">
       <div className="w-full flex flex-row  items-center gap-3 sm:gap-2">
+        <div className="flex flex-row h-28 w-28  rounded-full p-1 bg-gray-50 border" >
+          <nullMusicUser />
+        </div>
         <h3 className="text-base font-semibold text-gray-800">
           {music.userId.name}
         </h3>
@@ -76,7 +79,7 @@ function MusicPost({ music }) {
             play(music.data);
           }}
         >
-          <BsPlayCircle />
+          <BsPlayCircle  className="text-base" />
         </button>
       </div>
 

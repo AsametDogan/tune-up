@@ -72,7 +72,7 @@ function MusicPost({ music, deleteSound , changePublic,id}) {
             play(music.data);
           }}
         >
-          <BsPlayCircle />
+          <BsPlayCircle className="text-lg" />
         </button>
       </div>
 
@@ -81,7 +81,7 @@ function MusicPost({ music, deleteSound , changePublic,id}) {
       </div>
       {/* delete and edit buttons */}
       <div className="w-full flex flex-row justify-end gap-2">
-        <div className=" flex rounded-lg h-full border border-transparent focus:border-indigo-600  items-center">
+        <div className=" flex h-full text-xl border border-transparent focus:border-indigo-600 p-1 hover:bg-slate-200 rounded-full  items-center">
           {music.isPublic ? (
             <MdOutlineVisibility
               onClick={() => changePublic(id,false)}
@@ -94,7 +94,7 @@ function MusicPost({ music, deleteSound , changePublic,id}) {
             />
           )}
         </div>
-        <button onClick={()=>deleteSound(id)} className="flex items-center gap-1 text-xl text-red-600 p-1 hover:text-green-700 hover:bg-red-200 rounded-lg transition-all">
+        <button onClick={()=>deleteSound(id)} className="flex items-center gap-1 text-base px-1.5 text-red-600 p-1 hover:text-red-700 hover:bg-red-300 bg-red-100 rounded-lg transition-all">
           Delete
         </button>
       </div>
