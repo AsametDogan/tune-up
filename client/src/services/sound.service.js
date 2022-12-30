@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = process.env.REACT_APP_SERVER_URL + "/sound/";
+const url = "https://tune-up-xi.vercel.app/" + "/sound/";
 
 const getAll = () => {
     return axios.get(url);

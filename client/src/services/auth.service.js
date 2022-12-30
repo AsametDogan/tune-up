@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = process.env.REACT_APP_SERVER_URL + "/auth/";
+const url = "https://tune-up-xi.vercel.app/" + "/auth/";
 
 const login = (email, password) => {
   return axios.post(url + "login", {
